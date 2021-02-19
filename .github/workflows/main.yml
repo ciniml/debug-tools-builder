@@ -26,11 +26,22 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Build
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          docker build ./buildenv --tag buildenv
+          docker build ./openocd --tag openocd
+          docker build ./daplink --tag daplink
+          mkdir outputs
+          docker run -it --rm -v `pwd`/outputs:/outputs --entrypoint cp openocd -a /openocd-win    /outputs/openocd-win 
+          docker run -it --rm -v `pwd`/outputs:/outputs --entrypoint cp openocd -a /openocd-native /outputs/openocd-linux
+          docker run -it --rm -v `pwd`/outputs:/outputs --entrypoint cp daplink src/Seeed_Arduino_DAPLink/examples/custom_pins/Seeeduino_XIAO_DAPLink.uf2 /outputs/
+          mkdir artifacts
+          cd outputs
+          tar cf ../artifacts/openocd-linux.tar.gz openocd-linux
+          zip ur ../artifacts/openocd-win.zip openocd-win
+          cp Seeeduino_XIAO_DAPLink.uf2 ../artifacts/
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: binaries
+          path: artifacts/
