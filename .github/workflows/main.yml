@@ -31,15 +31,10 @@ jobs:
           docker build ./buildenv --tag buildenv
           docker build ./openocd --tag openocd
           docker build ./daplink --tag daplink
-          mkdir outputs
-          docker run -it --rm -v `pwd`/outputs:/outputs --entrypoint cp openocd -a /openocd-win    /outputs/openocd-win 
-          docker run -it --rm -v `pwd`/outputs:/outputs --entrypoint cp openocd -a /openocd-native /outputs/openocd-linux
-          docker run -it --rm -v `pwd`/outputs:/outputs --entrypoint cp daplink src/Seeed_Arduino_DAPLink/examples/custom_pins/Seeeduino_XIAO_DAPLink.uf2 /outputs/
           mkdir artifacts
-          cd outputs
-          tar cf ../artifacts/openocd-linux.tar.gz openocd-linux
-          zip ur ../artifacts/openocd-win.zip openocd-win
-          cp Seeeduino_XIAO_DAPLink.uf2 ../artifacts/
+          docker run --rm -v `pwd`/outputs:/outputs --entrypoint zip openocd -rq - /openocd-win > artifacts/openocd-win.zip 
+          docker run --rm -v `pwd`/outputs:/outputs --entrypoint sh openocd -c "mv /openocd-native /openocd-linux && tar zcf - -C / openocd-linux" > artifacts/openocd-linux.tar.gz
+          docker run --rm -v `pwd`/outputs:/outputs --entrypoint cat daplink src/Seeed_Arduino_DAPLink/examples/custom_pins/Seeeduino_XIAO_DAPLink.uf2 > artifacts/Seeeduino_XIAO_DAPLink.uf2
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
