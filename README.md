@@ -28,7 +28,7 @@ buildenvを使って OpenOCDやpicotooolのLinux版/Windows版をビルドする
 * Seeed Studioが管理する[Seeed_Arduino_DAPLink](https://github.com/Seeed-Studio/Seeed_Arduino_DAPLink)の[`custom_pins.ino`](https://github.com/Seeed-Studio/Seeed_Arduino_DAPLink/tree/master/examples/custom_pins) サンプルをビルドしたバイナリ
   * これを作ったのは筆者なので、サンプルとしては筆者が製作中のWio Terminal用デバッグアダプタボード用のピン配置になっている。ぼちぼち回路図アップします。
 * [picotool](https://github.com/raspberrypi/picotool)
-
+  
 ### Linuxでの使い方
 
 XXX-linux.tar.gz を適当な場所に展開するだけ。 対象のUSBデバイスによってはudevなどの設定をしないと動作時に管理者権限が必要となるので、そのあたりは適宜設定すること。
@@ -41,9 +41,9 @@ HIDのデバイスは特に設定することなく使える。
 
 CMSIS-DAP v2の場合は以下のとおりWinUSBドライバをインストールする。
 
-![figure/Zadig_CMSIS-DAP.png]
+![CMSIS-DAP Zadig](figure/Zadig_CMSIS-DAP.png)
 
 Raspberry Pi Picoのブートローダーの場合は以下のとおりWinUSBドライバをインストールする。
 
-![figure/Zadig_RP2_Boot.png]
+![RP2 Bott Zadig](figure/Zadig_RP2_Boot.png)
 
