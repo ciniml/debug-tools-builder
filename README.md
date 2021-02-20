@@ -18,7 +18,7 @@ buildenvを使って OpenOCDやpicotooolのLinux版/Windows版をビルドする
 
 ## ビルド済みバイナリ
 
-最新版は [リリースページから](releases/tag/v1.1) ダウンロードできる。
+最新版は [リリースページから](https://github.com/ciniml/debug-tools-builder/releases/tag/v1.1) ダウンロードできる。
 
 ### 内容物
 
