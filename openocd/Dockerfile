@@ -63,7 +63,7 @@ RUN cd src/picotool && \
     mkdir `pwd`/../../picotool-win && \
     export PICO_SDK_PATH=`pwd`/../pico-sdk && \
     mkdir build-win && cd build-win && \
-    PKG_CONFIG_LIBDIR=`pwd`/../../../libs/lib/pkgconfig cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=`pwd`/../../../mingw.cmake -DLIBUSB_INCLUDE_DIR=`pwd`/../../../libs/include/libusb-1.0 .. && \
+    PKG_CONFIG_LIBDIR=`pwd`/../../../libs/lib/pkgconfig cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXE_LINKER_FLAGS=-static -DCMAKE_TOOLCHAIN_FILE=`pwd`/../../../mingw.cmake -DLIBUSB_INCLUDE_DIR=`pwd`/../../../libs/include/libusb-1.0 .. && \
     make && \
     cp picotool.exe ../../../picotool-win/ && \
     cp ../README.md ../../../picotool-win/ && \
