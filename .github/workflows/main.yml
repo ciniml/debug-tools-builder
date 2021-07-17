@@ -31,7 +31,7 @@ jobs:
           docker build ./buildenv --tag buildenv
           docker build ./openocd --tag openocd
           docker build ./daplink --tag daplink
-          docker build ./rust-dap-xiao rust-dap-xiao
+          docker build ./rust-dap-xiao --tag rust-dap-xiao
           mkdir artifacts
           docker run --rm --entrypoint zip openocd -rq - /openocd-win > artifacts/openocd-win.zip 
           docker run --rm --entrypoint zip openocd -rq - /picotool-win > artifacts/picotool-win.zip 
