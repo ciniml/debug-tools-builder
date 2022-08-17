@@ -10,8 +10,20 @@ RUN rustup target add thumbv6m-none-eabi
 RUN mkdir src && cd src && \
     git clone https://github.com/ciniml/rust-dap.git --depth 1 && \
     cd ..
-# Build
-RUN cd src/rust-dap/rust-dap-xiao && \
-    cargo build --release && \
+# Install elf2uf2-rs
+RUN cargo install elf2uf2-rs
+# Build RPi Pico
+RUN cd src/rust-dap/boards/rpi_pico && \
+    cargo build --release --features=swd,set_clock,ram-exec && \
     cd target/thumbv6m-none-eabi/release && \
-    USER=root python3 /script/uf2conv.py -b 0x2000 rust-dap-xiao -o rust-dap-xiao.uf2
+    elf2uf2-rs rust-dap-raspberrypi-pico
+# # Build XIAO
+# RUN cd src/rust-dap/boards/xiao_m0 && \
+#     cargo build --release && \
+#     cd target/thumbv6m-none-eabi/release && \
+#     elf2uf2-rs rust-dap-xiao
+# Build XIAO RP2040
+RUN cd src/rust-dap/boards/xiao_rp2040 && \
+    cargo build --release --features=set_clock,ram-exec && \
+    cd target/thumbv6m-none-eabi/release && \
+    elf2uf2-rs rust-dap-xiao-rp2040

@@ -4,7 +4,7 @@ ENV TZ=Asia/Tokyo
 # Install required packages
 RUN apt-get update && \
     apt-get install -y tzdata && \
-    apt-get install -y make autoconf autopoint flex pkg-config git gcc g++ mingw-w64 libtool libhidapi-dev libusb-1.0-0-dev curl python3 zip cmake && \
+    apt-get install -y make autoconf autopoint flex pkg-config git gcc g++ mingw-w64 libtool libhidapi-dev libusb-1.0-0-dev libudev-dev curl python3 zip cmake && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 # Install arduino-cli

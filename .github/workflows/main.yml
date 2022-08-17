@@ -40,7 +40,8 @@ jobs:
           docker run --rm --entrypoint sh openocd -c "tar zcf - -C / openocd-linux" > artifacts/openocd-linux.tar.gz
           docker run --rm --entrypoint sh openocd -c "tar zcf - -C / picotool-linux" > artifacts/picotool-linux.tar.gz
           docker run --rm --entrypoint cat daplink src/Seeed_Arduino_DAPLink/examples/custom_pins/Seeeduino_XIAO_DAPLink.uf2 > artifacts/Seeeduino_XIAO_DAPLink.uf2
-          docker run --rm --entrypoint cat rust-dap-xiao /src/rust-dap/rust-dap-xiao/target/thumbv6m-none-eabi/release/rust-dap-xiao.uf2 > artifacts/rust-dap-xiao.uf2
+          docker run --rm --entrypoint cat rust-dap-xiao /src/rust-dap/boards/rpi_pico/target/thumbv6m-none-eabi/release/rust-dap-raspberrypi-pico.uf2 > artifacts/rust-dap-raspberrypi-pico.uf2
+          docker run --rm --entrypoint cat rust-dap-xiao /src/rust-dap/boards/xiao_rp2040/target/thumbv6m-none-eabi/release/rust-dap-xiao-rp2040.uf2 > artifacts/rust-dap-xiao-rp2040.uf2
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
