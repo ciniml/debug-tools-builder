@@ -32,9 +32,11 @@ jobs:
           docker build ./openocd --tag openocd
           docker build ./daplink --tag daplink
           docker build ./rust-dap-xiao --tag rust-dap-xiao
+          docker build ./openFPGALoader --tag openfpgaloader
           mkdir artifacts
           docker run --rm --entrypoint zip openocd -rq - /openocd-win > artifacts/openocd-win.zip 
           docker run --rm --entrypoint zip openocd -rq - /picotool-win > artifacts/picotool-win.zip 
+          docker run --rm --entrypoint zip openfpgaloader -rq - /openFPGALoader > artifacts/openFPGALoader-win.zip 
           docker run --rm --entrypoint sh openocd -c "tar zcf - -C / openocd-linux" > artifacts/openocd-linux.tar.gz
           docker run --rm --entrypoint sh openocd -c "tar zcf - -C / picotool-linux" > artifacts/picotool-linux.tar.gz
           docker run --rm --entrypoint cat daplink src/Seeed_Arduino_DAPLink/examples/custom_pins/Seeeduino_XIAO_DAPLink.uf2 > artifacts/Seeeduino_XIAO_DAPLink.uf2
