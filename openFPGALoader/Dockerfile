@@ -11,7 +11,7 @@ RUN mkdir src && cd src && \
     git clone https://github.com/libconfuse/libconfuse.git -b master --depth 1 && \
     git clone git://developer.intra2net.com/libftdi -b master --depth 1 && \
     git clone https://github.com/libusb/libusb --depth 1 && \
-    curl -L https://zlib.net/zlib-1.2.12.tar.gz | tar zx && \
+    curl -L https://zlib.net/zlib-1.2.13.tar.gz | tar zx && \
     cd ..
 # Make symbolic link for Windows.h
 RUN cd /usr/x86_64-w64-mingw32/include && \
