@@ -4,7 +4,7 @@ ENV TZ=Asia/Tokyo
 ADD mingw.cmake /mingw.cmake
 # Fetch sources
 RUN mkdir src && cd src && \
-    git clone https://github.com/ciniml/openocd openocd-code --depth 1 -b picoprobe --recursive && \
+    git clone https://github.com/openocd-org/openocd openocd-code --depth 1 -b v0.12.0-rc3 --recursive && \
     git clone https://github.com/signal11/hidapi --depth 1 && \
     git clone https://github.com/libusb/libusb --depth 1 && \
     git clone https://github.com/raspberrypi/picotool --depth 1 && \
