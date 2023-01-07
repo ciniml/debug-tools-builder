@@ -19,13 +19,13 @@ RUN cd /usr/x86_64-w64-mingw32/include && \
 RUN cd src/hidapi && \
     ./bootstrap && \
     ./configure --host=x86_64-w64-mingw32 --prefix=`pwd`/../../libs --enable-static --disable-shared && \
-    make && \
+    make -j `nproc` && \
     make install && \
     cd ../..
 RUN cd src/libusb && \
     ./bootstrap.sh && \
     ./configure --host=x86_64-w64-mingw32 --prefix=`pwd`/../../libs --enable-static --disable-shared && \
-    make && \
+    make -j `nproc` && \
     make install && \
     cd ../..
 # Prepare OpenOCD source
@@ -35,7 +35,7 @@ RUN cd src/openocd-code && \
     mkdir `pwd`/../../openocd-win && \
     mkdir build-win && cd build-win && \
     PKG_CONFIG_LIBDIR=`pwd`/../../../libs/lib/pkgconfig ../configure --prefix=`pwd`/../../../openocd-win --host=x86_64-w64-mingw32 --enable-cmsis-dap --enable-picoprobe && \
-    make && \
+    make -j `nproc` && \
     make install && \
     cp ../README ../../../openocd-win/ && \
     cd ../..
@@ -44,7 +44,7 @@ RUN cd src/openocd-code && \
     mkdir `pwd`/../../openocd-linux && \
     mkdir build-native && cd build-native && \
     ../configure --prefix=`pwd`/../../../openocd-linux --enable-cmsis-dap --enable-picoprobe && \
-    make && \
+    make -j `nproc` && \
     make install && \
     cp ../README ../../../openocd-linux/ && \
     cd ../..
@@ -54,7 +54,7 @@ RUN cd src/picotool && \
     export PICO_SDK_PATH=`pwd`/../pico-sdk && \
     mkdir build-linux && cd build-linux && \
     cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo .. && \
-    make && \
+    make -j `nproc` && \
     cp picotool ../../../picotool-linux/ && \
     cp ../README.md ../../../picotool-linux/ && \
     cd ../..
@@ -64,7 +64,7 @@ RUN cd src/picotool && \
     export PICO_SDK_PATH=`pwd`/../pico-sdk && \
     mkdir build-win && cd build-win && \
     PKG_CONFIG_LIBDIR=`pwd`/../../../libs/lib/pkgconfig cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXE_LINKER_FLAGS=-static -DCMAKE_TOOLCHAIN_FILE=`pwd`/../../../mingw.cmake -DLIBUSB_INCLUDE_DIR=`pwd`/../../../libs/include/libusb-1.0 .. && \
-    make && \
+    make -j `nproc` && \
     cp picotool.exe ../../../picotool-win/ && \
     cp ../README.md ../../../picotool-win/ && \
     cd ../..
